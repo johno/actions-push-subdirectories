@@ -3,6 +3,9 @@ FOLDER=$1
 GITHUB_USERNAME=$2
 BASE=$(pwd)
 
+git config --global user.email "johno-actions-push-subdirectories@example.org"
+git config --global user.name "$GITHUB_USERNAME"
+
 echo "Cloning folders in $FOLDER and pushing to $GITHUB_USERNAME"
 
 # sync to read-only clones
