@@ -3,10 +3,14 @@ FOLDER=$1
 GITHUB_USERNAME=$2
 BASE=$(pwd)
 
+echo "Cloning folders in $FOLDER and pushing to $GITHUB_USERNAME"
+
 # sync to read-only clones
 for folder in $FOLDER/*; do
   [ -d "$folder" ] || continue # only directories
   cd $BASE
+
+  echo "Pushing $folder"
 
   NAME=$(cat $folder/package.json | jq -r '.name')
   CLONE_DIR="__${NAME}__clone__"
