@@ -14,5 +14,8 @@ RUN apt-get update && \
     apt-get install -y git && \
     apt-get install -y jq
 
+git config --global user.email "johno-actions-push-subdirectories@example.org"
+git config --global user.name "johno-actions-push-subdirectories"
+
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
