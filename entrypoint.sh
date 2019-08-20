@@ -1,7 +1,7 @@
 #!/bin/bash
 FOLDER=$1
 GITHUB_USERNAME=$2
-STARTER_NAME="${3:-'.name'}"
+STARTER_NAME="${3:-'name'}"
 BASE=$(pwd)
 
 git config --global user.email "johno-actions-push-subdirectories@example.org"
@@ -16,7 +16,7 @@ for folder in $FOLDER/*; do
 
   echo "Pushing $folder"
 
-  NAME=$(cat $folder/package.json | jq -r "$STARTER_NAME")
+  NAME=$(cat $folder/package.json | jq --arg name "$STARTER_NAME" -r '.[$name]')
   CLONE_DIR="__${NAME}__clone__"
 
   # clone, delete files in the clone, and copy (new) files over
