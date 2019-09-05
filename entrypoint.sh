@@ -20,6 +20,7 @@ for folder in $FOLDER/*; do
   echo "Pushing $folder"
 
   NAME=$(cat $folder/package.json | jq --arg name "$STARTER_NAME" -r '.[$name]')
+  IS_WORKSPACE=$(cat $folder/package.json | jq -r '.workspaces')
   CLONE_DIR="__${NAME}__clone__"
 
   # clone, delete files in the clone, and copy (new) files over
@@ -29,12 +30,18 @@ for folder in $FOLDER/*; do
   find . | grep -v ".git" | grep -v "^\.*$" | xargs rm -rf # delete all files (to handle deletions in monorepo)
   cp -r $BASE/$folder/. .
 
-  rm -rf yarn.lock
-  yarn
+  # generate a new yarn.lock file based on package-lock.json unless you're in a workspace
+  if [ "$IS_WORKSPACE" = null ]; then
+    rm -rf yarn.lock
+    yarn
+  fi
 
-  git add .
-  git commit --message "Update $NAME from $GITHUB_REPOSITORY"
-  git push origin master
+  # Commit if there is anything to
+  if [ -n "$(git status --porcelain)" ]; then
+    git add .
+    git commit --message "Update $NAME from $GITHUB_REPOSITORY"
+    git push origin master
+  fi
 
   cd $BASE
 done
