@@ -4,7 +4,7 @@ set -e
 
 FOLDER=$1
 GITHUB_USERNAME=$2
-STARTER_NAME="${3:-'name'}"
+STARTER_NAME="${3:-name}"
 BASE=$(pwd)
 
 git config --global user.email "johno-actions-push-subdirectories@example.org"
