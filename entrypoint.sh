@@ -5,6 +5,7 @@ set -e
 FOLDER=$1
 GITHUB_USERNAME=$2
 STARTER_NAME="${3:-name}"
+BRANCH_NAME="${4:-main}"
 BASE=$(pwd)
 
 git config --global user.email "johno-actions-push-subdirectories@example.org"
@@ -45,7 +46,7 @@ for folder in $FOLDER/*; do
     echo  "  Committing $NAME to $GITHUB_REPOSITORY"
     git add .
     git commit --message "Update $NAME from $GITHUB_REPOSITORY"
-    git push origin master
+    git push origin $BRANCH_NAME
     echo  "  Completed $NAME"
   else
     echo "  No changes, skipping $NAME"
