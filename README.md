@@ -30,11 +30,12 @@ jobs:
 
 The `GITHUB_TOKEN` will automatically be defined, the `API_TOKEN_GITHUB` needs to be set in the `Secrets` section of your repository options. You can retrieve the `API_TOKEN_GITHUB` [here](https://github.com/settings/tokens) (set the `repo` permission).
 
-The action accepts three arguments - the first two are mandatory, the third is optional.
+The action accepts four arguments - the first two are mandatory, the third and fourth are optional.
 
 1. Name of the folder that contains your examples. Even if you only have one example currently it also should be placed inside its own folder (e.g. `examples/foo-bar`) as the script will read all folders inside the examples.
 2. GitHub username
 3. Repository name of the respective example. By default the `name` key from the example's `package.json` is used, e.g. the `name` of your example is `gatsby-starter-foobar`, then the script will try to push to `github.com/USERNAME/gatsby-starter-foobar`.
+4. The branch name that the changes should be pushed to. Defaults to `main`. 
 
 ### Custom starter names
 
@@ -50,6 +51,12 @@ Use the action with the third argument now:
 
 ```yml
 args: examples johno starter-name
+```
+
+Using the action to push to `master` branch:
+
+```yml
+args: examples johno starter-name master
 ```
 
 ## Related
