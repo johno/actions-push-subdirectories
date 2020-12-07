@@ -59,6 +59,12 @@ Using the action to push to `master` branch:
 args: examples johno starter-name master
 ```
 
+Using the action without a third argument by passing an empty string:
+
+```yml
+args: examples johno "" master
+```
+
 ## Related
 
 This code is adapted and modified from [Gatsby core](https://github.com/gatsbyjs/gatsby/blob/8933ca9b3bf2c9b4fd580dd437d8695c3be705b7/scripts/clone-and-validate.sh).
